@@ -4,53 +4,48 @@ Information at: [http://www.communityengine.org](http://www.communityengine.org)
 
 Requirements:
 
-    - RAILS VERSION 3.1.0.beta1 (lower versions are not supported)
-    - For now, patched versions of: meta_search, authlogic, calendar_date_select, and omniauth
-    - All other requirements are brought in automatically
-    - Don't forget to include the gems you plan to include in your application
+- Ruby 1.9.2
+- Rails 3.1.0.beta1 (lower versions are not supported)
+- All other requirements are brought in automatically
+- Don't forget to include the gems you plan to include in your application
+
 
 Getting CommunityEngine Running
 --------------------------------
 
-1. Copy the following into your `Gemfile`:
+Copy the following into your `Gemfile`:
 
     source 'http://rubygems.org'
 
-    gem 'community_engine', '2.0.0.beta', :git => 'https://github.com/bborn/communityengine.git', :branch => 'rails3'
-
-    # Bundle edge Rails
     gem 'rails', '3.1.0.beta1'
-    gem 'arel', '~> 2.1.0'
-    gem "rack", '1.3.0.beta'
-    gem 'authlogic', '~> 3.0.3'
+    gem 'sprockets', '2.0.0.beta.2'
+    gem 'community_engine', :git => 'https://github.com/wapcaplet/communityengine.git', :branch => 'rails3'
 
-    # Temporary edge sources for other libraries
-    gem 'calendar_date_select', :git => 'https://github.com/paneq/calendar_date_select.git', :branch => 'rails3test'
-    gem 'omniauth', :git => 'https://github.com/intridea/omniauth.git'
-    gem 'meta_search', :git => 'https://github.com/ernie/meta_search.git'
-
-    gem 'sqlite3'
-
-
-2. From your app's root directory run:
+From your app's root directory run:
 
     $ bundle install --binstubs
     $ bin/rake community_engine:install:migrations
     $ bin/rake db:migrate
 
-3. Add a file called `application.yml` to your `config` directory. In it put (at least):
+Add a file called `application.yml` to your `config` directory. In it put (at least):
 
     community_name: Your Application Name
 
-4. Mount CommunityEngine in your `config/routes.rb` file:
+Mount CommunityEngine in your `config/routes.rb` file:
 
     mount CommunityEngine::Engine => "/"
 
-5. Delete the default `views/layouts/application.html.erb` that Rails created for you. Delete `public/index.html` if you haven't already.
+Delete the default `views/layouts/application.html.erb` that Rails created for
+you. Delete `public/index.html` if you haven't already.
 
-6. Start your server!
+Enable asset pipelining so the stylesheets and images will work, by adding this line to your `config/application.rb`:
+
+    config.assets.enabled = true
+
+Then, start your server!
 
     $ bin/rails server
+
 
 Optional Configuration
 ======================
